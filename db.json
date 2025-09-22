@@ -1,0 +1,131 @@
+{
+  "produtos": [
+    {
+      "id": "prod001",
+      "nome": "Arroz Branco 5kg",
+      "codigo": "ARR001",
+      "preco": 25.9,
+      "estoque": 50,
+      "categoria": "Alimentos",
+      "unidade": "unidade"
+    },
+    {
+      "id": "prod002",
+      "nome": "Feijão Preto 1kg",
+      "codigo": "FEI001",
+      "preco": 8.5,
+      "estoque": 28,
+      "categoria": "Alimentos",
+      "unidade": "unidade"
+    },
+    {
+      "id": "prod003",
+      "nome": "Carne Bovina",
+      "codigo": "CAR001",
+      "preco": 32.9,
+      "estoque": 13,
+      "categoria": "Alimentos",
+      "unidade": "kg"
+    },
+    {
+      "id": "prod004",
+      "nome": "Detergente Líquido",
+      "codigo": "DET001",
+      "preco": 3.5,
+      "estoque": 8,
+      "categoria": "Limpeza",
+      "unidade": "unidade"
+    },
+    {
+      "id": "prod005",
+      "nome": "Leite Integral 1L",
+      "codigo": "LEI001",
+      "preco": 4.8,
+      "estoque": 22,
+      "categoria": "Bebidas",
+      "unidade": "unidade"
+    }
+  ],
+  "vendas": [
+    {
+      "id": "venda001",
+      "data": "2025-09-21T10:30:00.000Z",
+      "total": 47.9,
+      "itens": 3
+    },
+    {
+      "id": "mfufww6ts6paz6tfrdr",
+      "data": "2025-09-22T01:20:59.381Z",
+      "total": 65.8,
+      "itens": 1
+    },
+    {
+      "id": "mfug3fsvb6mda5x5ew4",
+      "data": "2025-09-22T01:26:04.735Z",
+      "total": 14.399999999999999,
+      "itens": 1
+    },
+    {
+      "id": "mfug5u5s9vrl1od1dc",
+      "data": "2025-09-22T01:27:56.656Z",
+      "total": 17,
+      "itens": 1
+    }
+  ],
+  "itensVenda": [
+    {
+      "id": "item001",
+      "vendaId": "venda001",
+      "produtoId": "prod001",
+      "quantidade": 1,
+      "preco": 25.9,
+      "subtotal": 25.9
+    },
+    {
+      "id": "item002",
+      "vendaId": "venda001",
+      "produtoId": "prod002",
+      "quantidade": 2,
+      "preco": 8.5,
+      "subtotal": 17
+    },
+    {
+      "id": "item003",
+      "vendaId": "venda001",
+      "produtoId": "prod005",
+      "quantidade": 1,
+      "preco": 4.8,
+      "subtotal": 4.8
+    },
+    {
+      "id": "mfufww765scnu0qxh7c",
+      "vendaId": "mfufww6ts6paz6tfrdr",
+      "produtoId": "prod003",
+      "quantidade": 2,
+      "preco": 32.9,
+      "subtotal": 65.8
+    },
+    {
+      "id": "mfug3ft7naal5sie0h",
+      "vendaId": "mfug3fsvb6mda5x5ew4",
+      "produtoId": "prod005",
+      "quantidade": 3,
+      "preco": 4.8,
+      "subtotal": 14.399999999999999
+    },
+    {
+      "id": "mfug5u66uoh138v1qk",
+      "vendaId": "mfug5u5s9vrl1od1dc",
+      "produtoId": "prod002",
+      "quantidade": 2,
+      "preco": 8.5,
+      "subtotal": 17
+    }
+  ],
+  "relatorios": [],
+  "usuario": {
+    "id": 1,
+    "nome": "Administrador",
+    "email": "admin@warehouse.com"
+  }
+}
