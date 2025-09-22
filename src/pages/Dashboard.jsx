@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { produtosAPI, vendasAPI } from '../services/api';
 import { formatCurrency } from '../utils/helpers';
 import Loading from '../components/Loading';
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const [stats, setStats] = useState({
     totalProdutos: 0,
     vendasHoje: 0,
@@ -124,7 +126,7 @@ const Dashboard = () => {
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 lg:gap-4">
           <button
-            onClick={() => (window.location.href = '/produtos')}
+            onClick={() => navigate('/produtos')}
             className="flex items-center justify-center p-4 border-2 border-dashed border-gray-300 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-colors"
           >
             <span className="text-2xl mr-2">📦</span>
@@ -132,7 +134,7 @@ const Dashboard = () => {
           </button>
 
           <button
-            onClick={() => (window.location.href = '/vendas')}
+            onClick={() => navigate('/vendas')}
             className="flex items-center justify-center p-4 border-2 border-dashed border-gray-300 rounded-lg hover:border-green-500 hover:bg-green-50 transition-colors"
           >
             <span className="text-2xl mr-2">💰</span>
@@ -140,7 +142,7 @@ const Dashboard = () => {
           </button>
 
           <button
-            onClick={() => (window.location.href = '/relatorios')}
+            onClick={() => navigate('/relatorios')}
             className="flex items-center justify-center p-4 border-2 border-dashed border-gray-300 rounded-lg hover:border-purple-500 hover:bg-purple-50 transition-colors"
           >
             <span className="text-2xl mr-2">📈</span>
