@@ -5,12 +5,14 @@ Sistema completo de gerenciamento de armazém desenvolvido com React.js, Vite, T
 ## 🚀 Funcionalidades
 
 ### 📦 Gestão de Produtos
+
 - Cadastro de produtos com nome, código, preço, estoque e categoria
 - Venda por unidade ou por quilograma (kg)
 - Validação de códigos de produto
 - Edição e exclusão de produtos
 
 ### 💰 Sistema de Vendas (POS)
+
 - Interface de ponto de venda intuitiva
 - Pesquisa de produtos por nome ou código
 - Carrinho de compras com cálculo automático
@@ -18,6 +20,7 @@ Sistema completo de gerenciamento de armazém desenvolvido com React.js, Vite, T
 - Suporte a vendas por unidade e peso
 
 ### 📋 Controle de Estoque
+
 - Visualização do estoque atual de todos os produtos
 - Alertas para produtos com baixo estoque
 - Ajustes manuais de estoque (entrada/saída)
@@ -25,6 +28,7 @@ Sistema completo de gerenciamento de armazém desenvolvido com React.js, Vite, T
 - Cálculo do valor total do estoque
 
 ### 📈 Relatórios Gerenciais
+
 - Dashboard com estatísticas gerais
 - Relatórios de vendas por período
 - Produtos mais vendidos
@@ -33,6 +37,7 @@ Sistema completo de gerenciamento de armazém desenvolvido com React.js, Vite, T
 - Ticket médio de vendas
 
 ### 👤 Administração
+
 - Sistema com usuário administrador único
 - Interface responsiva e moderna
 - Navegação intuitiva entre módulos
@@ -77,17 +82,20 @@ warehouse-system/
 ## 🚀 Instalação e Execução
 
 ### Pré-requisitos
+
 - Node.js 16+ instalado
 - npm ou yarn
 
 ### Passos para execução
 
 1. **Clone ou baixe o projeto:**
+
    ```bash
    cd warehouse-system
    ```
 
 2. **Instale as dependências:**
+
    ```bash
    npm install
    ```
@@ -98,17 +106,20 @@ warehouse-system/
    ```
 
 Este comando iniciará simultaneamente:
+
 - Frontend React (Vite) em `http://localhost:5173`
 - JSON Server API em `http://localhost:3001`
 
 ## 🌐 Deploy Online (Gratuito)
 
 ### Deploy Rápido no Vercel
+
 1. Acesse [vercel.com](https://vercel.com) e faça login
 2. Conecte este repositório GitHub
 3. Deploy automático!
 
 ### Outras opções gratuitas:
+
 - **Netlify**: [netlify.com](https://netlify.com)
 - **GitHub Pages**: Ideal para projetos estáticos
 - **Railway**: Para projetos full-stack
@@ -126,6 +137,7 @@ Este comando iniciará simultaneamente:
 ## 💾 Estrutura de Dados
 
 ### Produtos
+
 ```json
 {
   "id": "string",
@@ -139,6 +151,7 @@ Este comando iniciará simultaneamente:
 ```
 
 ### Vendas
+
 ```json
 {
   "id": "string",
@@ -149,6 +162,7 @@ Este comando iniciará simultaneamente:
 ```
 
 ### Itens de Venda
+
 ```json
 {
   "id": "string",
@@ -163,12 +177,14 @@ Este comando iniciará simultaneamente:
 ## 🎯 Como Usar
 
 ### 1. Cadastro de Produtos
+
 - Acesse "Produtos" no menu lateral
 - Clique em "Novo Produto"
 - Preencha os dados (nome, código, categoria, preço, estoque)
 - Escolha se a venda é por unidade ou quilograma
 
 ### 2. Realizar Vendas
+
 - Acesse "Vendas (POS)"
 - Pesquise produtos por nome ou código
 - Selecione o produto e informe a quantidade
@@ -176,12 +192,14 @@ Este comando iniciará simultaneamente:
 - Finalize a venda
 
 ### 3. Controlar Estoque
+
 - Acesse "Estoque"
 - Visualize produtos com baixo estoque
 - Realize ajustes manuais quando necessário
 - Informe o motivo do ajuste
 
 ### 4. Gerar Relatórios
+
 - Acesse "Relatórios"
 - Selecione o período desejado
 - Visualize vendas, faturamento e produtos mais vendidos
@@ -190,26 +208,32 @@ Este comando iniciará simultaneamente:
 ## 🔧 Configurações
 
 ### Personalizar Categorias
+
 Edite o array `categorias` em `src/pages/Produtos.jsx`:
+
 ```javascript
 const categorias = [
   'Alimentos',
-  'Bebidas', 
+  'Bebidas',
   'Limpeza',
   'Higiene',
   'Eletronicos',
-  'Outros'
+  'Outros',
 ];
 ```
 
 ### Configurar Limite de Estoque Baixo
+
 Modifique a condição em vários arquivos (padrão: <= 10 unidades):
+
 ```javascript
-produto.estoque <= 10
+produto.estoque <= 10;
 ```
 
 ### Alterar Porta da API
+
 Edite `src/services/api.js`:
+
 ```javascript
 const API_BASE_URL = 'http://localhost:3001';
 ```
@@ -217,6 +241,7 @@ const API_BASE_URL = 'http://localhost:3001';
 ## 🎨 Design
 
 O sistema utiliza um design clean e responsivo com:
+
 - Sidebar de navegação com ícones
 - Cards informativos no dashboard
 - Tabelas responsivas para listagens
@@ -227,6 +252,7 @@ O sistema utiliza um design clean e responsivo com:
 ## 📱 Responsividade
 
 O sistema é totalmente responsivo e funciona em:
+
 - Desktop (layout completo com sidebar)
 - Tablet (adaptação de grid e tabelas)
 - Mobile (navegação otimizada)
@@ -250,6 +276,7 @@ O sistema é totalmente responsivo e funciona em:
 ## 🌐 Versão Online
 
 Em produção, o sistema funciona com:
+
 - **Frontend**: Totalmente funcional
 - **API Mock**: Dados salvos no localStorage do navegador
 - **Dados de exemplo**: Produtos e vendas pré-cadastrados
@@ -260,6 +287,7 @@ Em produção, o sistema funciona com:
 ## 📞 Suporte
 
 Este é um sistema para testes locais. Para uso em produção, considere implementar:
+
 - Banco de dados real (PostgreSQL, MySQL)
 - Autenticação e autorização
 - Backup automático
@@ -269,3 +297,4 @@ Este é um sistema para testes locais. Para uso em produção, considere impleme
 ---
 
 **Desenvolvido com ❤️ para facilitar a gestão do seu armazém!**
+

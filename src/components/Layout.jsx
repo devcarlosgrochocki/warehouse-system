@@ -23,9 +23,7 @@ const Layout = ({ children }) => {
               </h1>
             </div>
             <div className="flex items-center">
-              <span className="text-sm text-gray-500">
-                Administrador
-              </span>
+              <span className="text-sm text-gray-500">Administrador</span>
             </div>
           </div>
         </div>
@@ -58,9 +56,7 @@ const Layout = ({ children }) => {
         </aside>
 
         {/* Main content */}
-        <main className="flex-1 p-8">
-          {children}
-        </main>
+        <main className="flex-1 p-8">{children}</main>
       </div>
     </div>
   );

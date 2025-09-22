@@ -3,10 +3,12 @@
 ## Deploy no Vercel (Recomendado - GRATUITO)
 
 ### 1. Criar conta no Vercel
+
 - Acesse: https://vercel.com
 - Faça login com GitHub
 
 ### 2. Deploy via GitHub
+
 1. Crie um repositório no GitHub
 2. Faça push do código:
    ```bash
@@ -18,6 +20,7 @@
 5. Deploy automático!
 
 ### 3. Deploy Manual (Alternativa)
+
 ```bash
 # Instalar Vercel CLI
 npm i -g vercel
@@ -29,11 +32,13 @@ vercel --prod
 ## Outras Opções de Deploy Gratuito
 
 ### Netlify
+
 1. Acesse: https://netlify.com
 2. Arraste a pasta `dist` para o site
 3. Ou conecte via GitHub
 
 ### GitHub Pages
+
 ```bash
 npm install --save-dev gh-pages
 
@@ -59,7 +64,7 @@ npm run deploy
 ## Links Úteis
 
 - **Vercel**: https://vercel.com
-- **Netlify**: https://netlify.com  
+- **Netlify**: https://netlify.com
 - **GitHub Pages**: https://pages.github.com
 
 ## Nota Importante

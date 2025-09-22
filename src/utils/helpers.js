@@ -35,6 +35,6 @@ export const validateProductCode = (code) => {
 // Calcular total da venda
 export const calculateSaleTotal = (items) => {
   return items.reduce((total, item) => {
-    return total + (item.preco * item.quantidade);
+    return total + item.preco * item.quantidade;
   }, 0);
 };

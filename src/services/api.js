@@ -45,8 +45,8 @@ export const itensVendaAPI = {
     if (isDev) {
       return api.get(`/itensVenda?vendaId=${vendaId}`);
     } else {
-      return api.get('/itensVenda').then(response => ({
-        data: response.data.filter(item => item.vendaId === vendaId)
+      return api.get('/itensVenda').then((response) => ({
+        data: response.data.filter((item) => item.vendaId === vendaId),
       }));
     }
   },

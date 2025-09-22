@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react';
 import { produtosAPI, vendasAPI, itensVendaAPI } from '../services/api';
-import { formatCurrency, generateId, calculateSaleTotal } from '../utils/helpers';
+import {
+  formatCurrency,
+  generateId,
+  calculateSaleTotal,
+} from '../utils/helpers';
 import Loading from '../components/Loading';
 
 const Vendas = () => {
@@ -28,9 +32,10 @@ const Vendas = () => {
     }
   };
 
-  const produtosFiltrados = produtos.filter(produto =>
-    produto.nome.toLowerCase().includes(pesquisa.toLowerCase()) ||
-    produto.codigo.toLowerCase().includes(pesquisa.toLowerCase())
+  const produtosFiltrados = produtos.filter(
+    (produto) =>
+      produto.nome.toLowerCase().includes(pesquisa.toLowerCase()) ||
+      produto.codigo.toLowerCase().includes(pesquisa.toLowerCase()),
   );
 
   const adicionarAoCarrinho = () => {
@@ -40,26 +45,34 @@ const Vendas = () => {
     }
 
     const qtd = parseFloat(quantidade);
-    
+
     if (qtd > produtoSelecionado.estoque) {
       alert('Quantidade superior ao estoque disponível');
       return;
     }
 
-    const itemExistente = carrinho.find(item => item.produtoId === produtoSelecionado.id);
-    
+    const itemExistente = carrinho.find(
+      (item) => item.produtoId === produtoSelecionado.id,
+    );
+
     if (itemExistente) {
       const novaQuantidade = itemExistente.quantidade + qtd;
       if (novaQuantidade > produtoSelecionado.estoque) {
         alert('Quantidade total superior ao estoque disponível');
         return;
       }
-      
-      setCarrinho(carrinho.map(item =>
-        item.produtoId === produtoSelecionado.id
-          ? { ...item, quantidade: novaQuantidade, subtotal: novaQuantidade * item.preco }
-          : item
-      ));
+
+      setCarrinho(
+        carrinho.map((item) =>
+          item.produtoId === produtoSelecionado.id
+            ? {
+                ...item,
+                quantidade: novaQuantidade,
+                subtotal: novaQuantidade * item.preco,
+              }
+            : item,
+        ),
+      );
     } else {
       const novoItem = {
         id: generateId(),
@@ -69,18 +82,18 @@ const Vendas = () => {
         preco: produtoSelecionado.preco,
         quantidade: qtd,
         unidade: produtoSelecionado.unidade,
-        subtotal: qtd * produtoSelecionado.preco
+        subtotal: qtd * produtoSelecionado.preco,
       };
       setCarrinho([...carrinho, novoItem]);
     }
-    
+
     setProdutoSelecionado(null);
     setQuantidade('');
     setPesquisa('');
   };
 
   const removerDoCarrinho = (itemId) => {
-    setCarrinho(carrinho.filter(item => item.id !== itemId));
+    setCarrinho(carrinho.filter((item) => item.id !== itemId));
   };
 
   const finalizarVenda = async () => {
@@ -92,17 +105,17 @@ const Vendas = () => {
     try {
       const total = calculateSaleTotal(carrinho);
       const vendaId = generateId();
-      
+
       // Criar venda
       const venda = {
         id: vendaId,
         data: new Date().toISOString(),
         total: total,
-        itens: carrinho.length
+        itens: carrinho.length,
       };
-      
+
       await vendasAPI.create(venda);
-      
+
       // Criar itens da venda
       for (const item of carrinho) {
         const itemVenda = {
@@ -111,24 +124,23 @@ const Vendas = () => {
           produtoId: item.produtoId,
           quantidade: item.quantidade,
           preco: item.preco,
-          subtotal: item.subtotal
+          subtotal: item.subtotal,
         };
         await itensVendaAPI.create(itemVenda);
-        
+
         // Atualizar estoque do produto
-        const produto = produtos.find(p => p.id === item.produtoId);
+        const produto = produtos.find((p) => p.id === item.produtoId);
         if (produto) {
           await produtosAPI.update(produto.id, {
             ...produto,
-            estoque: produto.estoque - item.quantidade
+            estoque: produto.estoque - item.quantidade,
           });
         }
       }
-      
+
       alert(`Venda finalizada com sucesso!\nTotal: ${formatCurrency(total)}`);
       setCarrinho([]);
       await loadProdutos(); // Recarregar produtos para atualizar estoque
-      
     } catch (error) {
       console.error('Erro ao finalizar venda:', error);
       alert('Erro ao finalizar venda');
@@ -142,7 +154,9 @@ const Vendas = () => {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Ponto de Venda (POS)</h1>
+        <h1 className="text-3xl font-bold text-gray-900">
+          Ponto de Venda (POS)
+        </h1>
         <p className="text-gray-600 mt-2">Sistema de vendas do armazém</p>
       </div>
 
@@ -150,7 +164,7 @@ const Vendas = () => {
         {/* Seleção de produtos */}
         <div className="bg-white rounded-lg shadow p-6">
           <h2 className="text-xl font-bold mb-4">Adicionar Produtos</h2>
-          
+
           {/* Pesquisa */}
           <div className="mb-4">
             <input
@@ -178,11 +192,18 @@ const Vendas = () => {
                   <div>
                     <div className="font-medium">{produto.nome}</div>
                     <div className="text-sm text-gray-500">
-                      {produto.codigo} - {formatCurrency(produto.preco)} / {produto.unidade}
+                      {produto.codigo} - {formatCurrency(produto.preco)} /{' '}
+                      {produto.unidade}
                     </div>
                   </div>
                   <div className="text-sm">
-                    <span className={`${produto.estoque <= 10 ? 'text-red-600 font-bold' : 'text-gray-600'}`}>
+                    <span
+                      className={`${
+                        produto.estoque <= 10
+                          ? 'text-red-600 font-bold'
+                          : 'text-gray-600'
+                      }`}
+                    >
                       Est: {produto.estoque}
                     </span>
                   </div>
@@ -198,7 +219,8 @@ const Vendas = () => {
                 <strong>{produtoSelecionado.nome}</strong>
                 <br />
                 <span className="text-sm text-gray-600">
-                  {formatCurrency(produtoSelecionado.preco)} por {produtoSelecionado.unidade}
+                  {formatCurrency(produtoSelecionado.preco)} por{' '}
+                  {produtoSelecionado.unidade}
                 </span>
               </div>
               <div className="flex space-x-2">
@@ -225,24 +247,28 @@ const Vendas = () => {
         {/* Carrinho */}
         <div className="bg-white rounded-lg shadow p-6">
           <h2 className="text-xl font-bold mb-4">Carrinho de Compras</h2>
-          
+
           {carrinho.length === 0 ? (
-            <div className="text-center text-gray-500 py-8">
-              Carrinho vazio
-            </div>
+            <div className="text-center text-gray-500 py-8">Carrinho vazio</div>
           ) : (
             <>
               <div className="space-y-2 max-h-96 overflow-y-auto">
                 {carrinho.map((item) => (
-                  <div key={item.id} className="flex justify-between items-center p-3 border rounded-lg">
+                  <div
+                    key={item.id}
+                    className="flex justify-between items-center p-3 border rounded-lg"
+                  >
                     <div className="flex-1">
                       <div className="font-medium">{item.nome}</div>
                       <div className="text-sm text-gray-500">
-                        {item.quantidade} {item.unidade} × {formatCurrency(item.preco)}
+                        {item.quantidade} {item.unidade} ×{' '}
+                        {formatCurrency(item.preco)}
                       </div>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <span className="font-bold">{formatCurrency(item.subtotal)}</span>
+                      <span className="font-bold">
+                        {formatCurrency(item.subtotal)}
+                      </span>
                       <button
                         onClick={() => removerDoCarrinho(item.id)}
                         className="text-red-600 hover:text-red-800"
@@ -259,7 +285,7 @@ const Vendas = () => {
                   <span>Total:</span>
                   <span>{formatCurrency(totalVenda)}</span>
                 </div>
-                
+
                 <button
                   onClick={finalizarVenda}
                   className="w-full mt-4 bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 font-bold text-lg"

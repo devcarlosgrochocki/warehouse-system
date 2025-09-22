@@ -38,7 +38,7 @@ const Estoque = () => {
 
   const handleAjusteEstoque = async (e) => {
     e.preventDefault();
-    
+
     if (!quantidadeAjuste || parseFloat(quantidadeAjuste) <= 0) {
       alert('Informe uma quantidade válida');
       return;
@@ -52,7 +52,7 @@ const Estoque = () => {
     try {
       const quantidade = parseFloat(quantidadeAjuste);
       let novoEstoque = produtoAjuste.estoque;
-      
+
       if (tipoAjuste === 'entrada') {
         novoEstoque += quantidade;
       } else {
@@ -65,15 +65,16 @@ const Estoque = () => {
 
       await produtosAPI.update(produtoAjuste.id, {
         ...produtoAjuste,
-        estoque: novoEstoque
+        estoque: novoEstoque,
       });
 
       await loadProdutos();
       setShowAjusteModal(false);
       setProdutoAjuste(null);
-      
-      alert(`Ajuste realizado com sucesso!\nEstoque anterior: ${produtoAjuste.estoque}\nNovo estoque: ${novoEstoque}`);
-      
+
+      alert(
+        `Ajuste realizado com sucesso!\nEstoque anterior: ${produtoAjuste.estoque}\nNovo estoque: ${novoEstoque}`,
+      );
     } catch (error) {
       console.error('Erro ao ajustar estoque:', error);
       alert('Erro ao ajustar estoque');
@@ -81,24 +82,38 @@ const Estoque = () => {
   };
 
   const getStatusEstoque = (estoque) => {
-    if (estoque === 0) return { status: 'Sem Estoque', color: 'bg-red-100 text-red-800' };
-    if (estoque <= 10) return { status: 'Baixo Estoque', color: 'bg-yellow-100 text-yellow-800' };
+    if (estoque === 0)
+      return { status: 'Sem Estoque', color: 'bg-red-100 text-red-800' };
+    if (estoque <= 10)
+      return {
+        status: 'Baixo Estoque',
+        color: 'bg-yellow-100 text-yellow-800',
+      };
     return { status: 'Normal', color: 'bg-green-100 text-green-800' };
   };
 
   // Estatísticas do estoque
   const totalProdutos = produtos.length;
-  const produtosSemEstoque = produtos.filter(p => p.estoque === 0).length;
-  const produtosBaixoEstoque = produtos.filter(p => p.estoque > 0 && p.estoque <= 10).length;
-  const valorTotalEstoque = produtos.reduce((total, produto) => total + (produto.preco * produto.estoque), 0);
+  const produtosSemEstoque = produtos.filter((p) => p.estoque === 0).length;
+  const produtosBaixoEstoque = produtos.filter(
+    (p) => p.estoque > 0 && p.estoque <= 10,
+  ).length;
+  const valorTotalEstoque = produtos.reduce(
+    (total, produto) => total + produto.preco * produto.estoque,
+    0,
+  );
 
   if (loading) return <Loading />;
 
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Controle de Estoque</h1>
-        <p className="text-gray-600 mt-2">Gerencie e ajuste os estoques dos produtos</p>
+        <h1 className="text-3xl font-bold text-gray-900">
+          Controle de Estoque
+        </h1>
+        <p className="text-gray-600 mt-2">
+          Gerencie e ajuste os estoques dos produtos
+        </p>
       </div>
 
       {/* Estatísticas */}
@@ -109,8 +124,12 @@ const Estoque = () => {
               <span className="text-white text-2xl">📦</span>
             </div>
             <div className="ml-4">
-              <h3 className="text-sm font-medium text-gray-500">Total de Produtos</h3>
-              <p className="text-2xl font-bold text-gray-900">{totalProdutos}</p>
+              <h3 className="text-sm font-medium text-gray-500">
+                Total de Produtos
+              </h3>
+              <p className="text-2xl font-bold text-gray-900">
+                {totalProdutos}
+              </p>
             </div>
           </div>
         </div>
@@ -122,7 +141,9 @@ const Estoque = () => {
             </div>
             <div className="ml-4">
               <h3 className="text-sm font-medium text-gray-500">Sem Estoque</h3>
-              <p className="text-2xl font-bold text-gray-900">{produtosSemEstoque}</p>
+              <p className="text-2xl font-bold text-gray-900">
+                {produtosSemEstoque}
+              </p>
             </div>
           </div>
         </div>
@@ -133,8 +154,12 @@ const Estoque = () => {
               <span className="text-white text-2xl">⚠️</span>
             </div>
             <div className="ml-4">
-              <h3 className="text-sm font-medium text-gray-500">Baixo Estoque</h3>
-              <p className="text-2xl font-bold text-gray-900">{produtosBaixoEstoque}</p>
+              <h3 className="text-sm font-medium text-gray-500">
+                Baixo Estoque
+              </h3>
+              <p className="text-2xl font-bold text-gray-900">
+                {produtosBaixoEstoque}
+              </p>
             </div>
           </div>
         </div>
@@ -146,7 +171,9 @@ const Estoque = () => {
             </div>
             <div className="ml-4">
               <h3 className="text-sm font-medium text-gray-500">Valor Total</h3>
-              <p className="text-2xl font-bold text-gray-900">{formatCurrency(valorTotalEstoque)}</p>
+              <p className="text-2xl font-bold text-gray-900">
+                {formatCurrency(valorTotalEstoque)}
+              </p>
             </div>
           </div>
         </div>
@@ -186,8 +213,12 @@ const Estoque = () => {
               return (
                 <tr key={produto.id}>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm font-medium text-gray-900">{produto.nome}</div>
-                    <div className="text-sm text-gray-500">{formatCurrency(produto.preco)} / {produto.unidade}</div>
+                    <div className="text-sm font-medium text-gray-900">
+                      {produto.nome}
+                    </div>
+                    <div className="text-sm text-gray-500">
+                      {formatCurrency(produto.preco)} / {produto.unidade}
+                    </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                     {produto.codigo}
@@ -201,7 +232,9 @@ const Estoque = () => {
                     {produto.estoque} {produto.unidade}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${status.color}`}>
+                    <span
+                      className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${status.color}`}
+                    >
                       {status.status}
                     </span>
                   </td>
@@ -221,7 +254,7 @@ const Estoque = () => {
             })}
           </tbody>
         </table>
-        
+
         {produtos.length === 0 && (
           <div className="text-center py-8 text-gray-500">
             Nenhum produto cadastrado
@@ -234,15 +267,19 @@ const Estoque = () => {
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-6 w-full max-w-md">
             <h2 className="text-lg font-bold mb-4">Ajustar Estoque</h2>
-            
+
             <div className="mb-4 p-4 bg-gray-50 rounded-lg">
               <div className="font-medium">{produtoAjuste.nome}</div>
-              <div className="text-sm text-gray-600">Estoque atual: {produtoAjuste.estoque} {produtoAjuste.unidade}</div>
+              <div className="text-sm text-gray-600">
+                Estoque atual: {produtoAjuste.estoque} {produtoAjuste.unidade}
+              </div>
             </div>
-            
+
             <form onSubmit={handleAjusteEstoque} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700">Tipo de Ajuste</label>
+                <label className="block text-sm font-medium text-gray-700">
+                  Tipo de Ajuste
+                </label>
                 <select
                   value={tipoAjuste}
                   onChange={(e) => setTipoAjuste(e.target.value)}
@@ -254,7 +291,9 @@ const Estoque = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700">Quantidade</label>
+                <label className="block text-sm font-medium text-gray-700">
+                  Quantidade
+                </label>
                 <input
                   type="number"
                   step={produtoAjuste.unidade === 'kg' ? '0.01' : '1'}
@@ -267,7 +306,9 @@ const Estoque = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700">Motivo do Ajuste</label>
+                <label className="block text-sm font-medium text-gray-700">
+                  Motivo do Ajuste
+                </label>
                 <textarea
                   required
                   value={motivoAjuste}

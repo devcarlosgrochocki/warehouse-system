@@ -11,95 +11,98 @@ class MockAPI {
       const initialData = {
         produtos: [
           {
-            id: "prod001",
-            nome: "Arroz Branco 5kg",
-            codigo: "ARR001",
-            preco: 25.90,
+            id: 'prod001',
+            nome: 'Arroz Branco 5kg',
+            codigo: 'ARR001',
+            preco: 25.9,
             estoque: 50,
-            categoria: "Alimentos",
-            unidade: "unidade"
+            categoria: 'Alimentos',
+            unidade: 'unidade',
           },
           {
-            id: "prod002", 
-            nome: "Feijão Preto 1kg",
-            codigo: "FEI001",
-            preco: 8.50,
+            id: 'prod002',
+            nome: 'Feijão Preto 1kg',
+            codigo: 'FEI001',
+            preco: 8.5,
             estoque: 30,
-            categoria: "Alimentos",
-            unidade: "unidade"
+            categoria: 'Alimentos',
+            unidade: 'unidade',
           },
           {
-            id: "prod003",
-            nome: "Carne Bovina",
-            codigo: "CAR001", 
-            preco: 32.90,
+            id: 'prod003',
+            nome: 'Carne Bovina',
+            codigo: 'CAR001',
+            preco: 32.9,
             estoque: 15,
-            categoria: "Alimentos",
-            unidade: "kg"
+            categoria: 'Alimentos',
+            unidade: 'kg',
           },
           {
-            id: "prod004",
-            nome: "Detergente Líquido",
-            codigo: "DET001",
-            preco: 3.50,
+            id: 'prod004',
+            nome: 'Detergente Líquido',
+            codigo: 'DET001',
+            preco: 3.5,
             estoque: 8,
-            categoria: "Limpeza",
-            unidade: "unidade"
+            categoria: 'Limpeza',
+            unidade: 'unidade',
           },
           {
-            id: "prod005",
-            nome: "Leite Integral 1L",
-            codigo: "LEI001",
-            preco: 4.80,
+            id: 'prod005',
+            nome: 'Leite Integral 1L',
+            codigo: 'LEI001',
+            preco: 4.8,
             estoque: 25,
-            categoria: "Bebidas",
-            unidade: "unidade"
-          }
+            categoria: 'Bebidas',
+            unidade: 'unidade',
+          },
         ],
         vendas: [
           {
-            id: "venda001",
-            data: "2025-09-21T10:30:00.000Z",
-            total: 47.90,
-            itens: 3
-          }
+            id: 'venda001',
+            data: '2025-09-21T10:30:00.000Z',
+            total: 47.9,
+            itens: 3,
+          },
         ],
         itensVenda: [
           {
-            id: "item001",
-            vendaId: "venda001",
-            produtoId: "prod001",
+            id: 'item001',
+            vendaId: 'venda001',
+            produtoId: 'prod001',
             quantidade: 1,
-            preco: 25.90,
-            subtotal: 25.90
+            preco: 25.9,
+            subtotal: 25.9,
           },
           {
-            id: "item002",
-            vendaId: "venda001",
-            produtoId: "prod002",
+            id: 'item002',
+            vendaId: 'venda001',
+            produtoId: 'prod002',
             quantidade: 2,
-            preco: 8.50,
-            subtotal: 17.00
+            preco: 8.5,
+            subtotal: 17.0,
           },
           {
-            id: "item003",
-            vendaId: "venda001",
-            produtoId: "prod005",
+            id: 'item003',
+            vendaId: 'venda001',
+            produtoId: 'prod005',
             quantidade: 1,
-            preco: 4.80,
-            subtotal: 4.80
-          }
+            preco: 4.8,
+            subtotal: 4.8,
+          },
         ],
         relatorios: [],
         usuario: {
           id: 1,
-          nome: "Administrador",
-          email: "admin@warehouse.com"
-        }
+          nome: 'Administrador',
+          email: 'admin@warehouse.com',
+        },
       };
 
-      Object.keys(initialData).forEach(key => {
-        localStorage.setItem(this.baseKey + key, JSON.stringify(initialData[key]));
+      Object.keys(initialData).forEach((key) => {
+        localStorage.setItem(
+          this.baseKey + key,
+          JSON.stringify(initialData[key]),
+        );
       });
     }
   }
@@ -112,7 +115,9 @@ class MockAPI {
 
   post(endpoint, data) {
     const key = endpoint.replace('/', '');
-    const existing = JSON.parse(localStorage.getItem(this.baseKey + key) || '[]');
+    const existing = JSON.parse(
+      localStorage.getItem(this.baseKey + key) || '[]',
+    );
     existing.push(data);
     localStorage.setItem(this.baseKey + key, JSON.stringify(existing));
     return Promise.resolve({ data });
@@ -120,8 +125,10 @@ class MockAPI {
 
   put(endpoint, data) {
     const [collection, id] = endpoint.replace('/', '').split('/');
-    const existing = JSON.parse(localStorage.getItem(this.baseKey + collection) || '[]');
-    const index = existing.findIndex(item => item.id === id);
+    const existing = JSON.parse(
+      localStorage.getItem(this.baseKey + collection) || '[]',
+    );
+    const index = existing.findIndex((item) => item.id === id);
     if (index !== -1) {
       existing[index] = data;
       localStorage.setItem(this.baseKey + collection, JSON.stringify(existing));
@@ -131,8 +138,10 @@ class MockAPI {
 
   delete(endpoint) {
     const [collection, id] = endpoint.replace('/', '').split('/');
-    const existing = JSON.parse(localStorage.getItem(this.baseKey + collection) || '[]');
-    const filtered = existing.filter(item => item.id !== id);
+    const existing = JSON.parse(
+      localStorage.getItem(this.baseKey + collection) || '[]',
+    );
+    const filtered = existing.filter((item) => item.id !== id);
     localStorage.setItem(this.baseKey + collection, JSON.stringify(filtered));
     return Promise.resolve({ data: { message: 'Deleted' } });
   }
