@@ -101,6 +101,20 @@ Este comando iniciará simultaneamente:
 - Frontend React (Vite) em `http://localhost:5173`
 - JSON Server API em `http://localhost:3001`
 
+## 🌐 Deploy Online (Gratuito)
+
+### Deploy Rápido no Vercel
+1. Acesse [vercel.com](https://vercel.com) e faça login
+2. Conecte este repositório GitHub
+3. Deploy automático!
+
+### Outras opções gratuitas:
+- **Netlify**: [netlify.com](https://netlify.com)
+- **GitHub Pages**: Ideal para projetos estáticos
+- **Railway**: Para projetos full-stack
+
+📋 **Ver guia completo**: [DEPLOY.md](./DEPLOY.md)
+
 ### Scripts Disponíveis
 
 - `npm run dev` - Executa frontend + backend simultaneamente
@@ -232,6 +246,16 @@ O sistema é totalmente responsivo e funciona em:
 - Múltiplos usuários com permissões
 - Integração com impressoras fiscais
 - App mobile
+
+## 🌐 Versão Online
+
+Em produção, o sistema funciona com:
+- **Frontend**: Totalmente funcional
+- **API Mock**: Dados salvos no localStorage do navegador
+- **Dados de exemplo**: Produtos e vendas pré-cadastrados
+- **Funcionalidades completas**: Todas as features funcionando
+
+> **Nota**: Para uso comercial, implemente um backend real com banco de dados.
 
 ## 📞 Suporte
 
