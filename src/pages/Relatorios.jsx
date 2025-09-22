@@ -137,17 +137,21 @@ const Relatorios = () => {
 
   return (
     <div>
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Relatórios</h1>
+      <div className="mb-6 lg:mb-8">
+        <h1 className="text-2xl lg:text-3xl font-bold text-gray-900">
+          Relatórios
+        </h1>
         <p className="text-gray-600 mt-2">
           Análise de vendas e performance do armazém
         </p>
       </div>
 
       {/* Filtros de período */}
-      <div className="bg-white rounded-lg shadow p-6 mb-8">
-        <h2 className="text-xl font-bold mb-4">Período de Análise</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+      <div className="bg-white rounded-lg shadow p-4 lg:p-6 mb-6 lg:mb-8">
+        <h2 className="text-lg lg:text-xl font-bold mb-4">
+          Período de Análise
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 items-end">
           <div>
             <label className="block text-sm font-medium text-gray-700">
               Data Início
@@ -170,20 +174,20 @@ const Relatorios = () => {
               className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2"
             />
           </div>
-          <div className="space-x-2">
+          <div className="flex flex-col sm:flex-row gap-2">
             <button
               onClick={() => {
                 const hoje = new Date().toISOString().split('T')[0];
                 setDataInicio(hoje);
                 setDataFim(hoje);
               }}
-              className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+              className="w-full sm:w-auto bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 text-sm lg:text-base"
             >
               Hoje
             </button>
             <button
               onClick={gerarRelatorioDiario}
-              className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700"
+              className="w-full sm:w-auto bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 text-sm lg:text-base"
             >
               Fechar Dia
             </button>
@@ -192,31 +196,33 @@ const Relatorios = () => {
       </div>
 
       {/* Estatísticas gerais */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <div className="bg-white rounded-lg shadow p-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 mb-6 lg:mb-8">
+        <div className="bg-white rounded-lg shadow p-4 lg:p-6">
           <div className="flex items-center">
-            <div className="bg-blue-500 rounded-lg p-3">
-              <span className="text-white text-2xl">🛒</span>
+            <div className="bg-blue-500 rounded-lg p-2 lg:p-3">
+              <span className="text-white text-lg lg:text-2xl">🛒</span>
             </div>
-            <div className="ml-4">
-              <h3 className="text-sm font-medium text-gray-500">
+            <div className="ml-3 lg:ml-4">
+              <h3 className="text-xs lg:text-sm font-medium text-gray-500">
                 Total de Vendas
               </h3>
-              <p className="text-2xl font-bold text-gray-900">{totalVendas}</p>
+              <p className="text-lg lg:text-2xl font-bold text-gray-900">
+                {totalVendas}
+              </p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow p-6">
+        <div className="bg-white rounded-lg shadow p-4 lg:p-6">
           <div className="flex items-center">
-            <div className="bg-green-500 rounded-lg p-3">
-              <span className="text-white text-2xl">💰</span>
+            <div className="bg-green-500 rounded-lg p-2 lg:p-3">
+              <span className="text-white text-lg lg:text-2xl">💰</span>
             </div>
-            <div className="ml-4">
-              <h3 className="text-sm font-medium text-gray-500">
+            <div className="ml-3 lg:ml-4">
+              <h3 className="text-xs lg:text-sm font-medium text-gray-500">
                 Faturamento Total
               </h3>
-              <p className="text-2xl font-bold text-gray-900">
+              <p className="text-lg lg:text-2xl font-bold text-gray-900">
                 {formatCurrency(faturamentoTotal)}
               </p>
             </div>

@@ -87,24 +87,30 @@ const Dashboard = () => {
 
   return (
     <div>
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
+      <div className="mb-6 lg:mb-8">
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
+          Dashboard
+        </h1>
         <p className="text-gray-600 mt-2">Visão geral do seu armazém</p>
       </div>
 
       {/* Cards de estatísticas */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-6 lg:mb-8">
         {statsCards.map((card, index) => (
-          <div key={index} className="bg-white rounded-lg shadow p-6">
+          <div key={index} className="bg-white rounded-lg shadow p-4 lg:p-6">
             <div className="flex items-center">
-              <div className={`${card.color} rounded-lg p-3`}>
-                <span className="text-white text-2xl">{card.icon}</span>
+              <div className={`${card.color} rounded-lg p-2 lg:p-3`}>
+                <span className="text-white text-xl lg:text-2xl">
+                  {card.icon}
+                </span>
               </div>
-              <div className="ml-4">
-                <h3 className="text-sm font-medium text-gray-500">
+              <div className="ml-3 lg:ml-4 min-w-0 flex-1">
+                <h3 className="text-xs lg:text-sm font-medium text-gray-500 truncate">
                   {card.title}
                 </h3>
-                <p className="text-2xl font-bold text-gray-900">{card.value}</p>
+                <p className="text-lg lg:text-2xl font-bold text-gray-900 truncate">
+                  {card.value}
+                </p>
               </div>
             </div>
           </div>
@@ -112,9 +118,11 @@ const Dashboard = () => {
       </div>
 
       {/* Ações rápidas */}
-      <div className="bg-white rounded-lg shadow p-6">
-        <h2 className="text-xl font-bold text-gray-900 mb-4">Ações Rápidas</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="bg-white rounded-lg shadow p-4 lg:p-6">
+        <h2 className="text-lg lg:text-xl font-bold text-gray-900 mb-4">
+          Ações Rápidas
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 lg:gap-4">
           <button
             onClick={() => (window.location.href = '/produtos')}
             className="flex items-center justify-center p-4 border-2 border-dashed border-gray-300 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-colors"

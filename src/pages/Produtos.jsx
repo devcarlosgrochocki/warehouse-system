@@ -126,16 +126,18 @@ const Produtos = () => {
 
   return (
     <div>
-      <div className="mb-8 flex justify-between items-center">
+      <div className="mb-6 lg:mb-8 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Produtos</h1>
+          <h1 className="text-2xl lg:text-3xl font-bold text-gray-900">
+            Produtos
+          </h1>
           <p className="text-gray-600 mt-2">
             Gerencie seu catálogo de produtos
           </p>
         </div>
         <button
           onClick={() => setShowModal(true)}
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+          className="w-full sm:w-auto bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
         >
           + Novo Produto
         </button>
@@ -143,78 +145,147 @@ const Produtos = () => {
 
       {/* Lista de produtos */}
       <div className="bg-white rounded-lg shadow overflow-hidden">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Produto
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Código
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Categoria
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Preço
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Estoque
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Ações
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {produtos.map((produto) => (
-              <tr key={produto.id}>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm font-medium text-gray-900">
+        {/* Desktop Table */}
+        <div className="hidden lg:block">
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead className="bg-gray-50">
+              <tr>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Produto
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Código
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Categoria
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Preço
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Estoque
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Ações
+                </th>
+              </tr>
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {produtos.map((produto) => (
+                <tr key={produto.id}>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-sm font-medium text-gray-900">
+                      {produto.nome}
+                    </div>
+                    <div className="text-sm text-gray-500">
+                      Por {produto.unidade}
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    {produto.codigo}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                      {produto.categoria}
+                    </span>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    {formatCurrency(produto.preco)}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    <span
+                      className={`${
+                        produto.estoque <= 10 ? 'text-red-600 font-bold' : ''
+                      }`}
+                    >
+                      {produto.estoque}
+                    </span>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
+                    <button
+                      onClick={() => handleEdit(produto)}
+                      className="text-blue-600 hover:text-blue-900"
+                    >
+                      Editar
+                    </button>
+                    <button
+                      onClick={() => handleDelete(produto.id)}
+                      className="text-red-600 hover:text-red-900"
+                    >
+                      Excluir
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {/* Mobile Cards */}
+        <div className="lg:hidden">
+          {produtos.map((produto, index) => (
+            <div
+              key={produto.id}
+              className={`p-4 ${index > 0 ? 'border-t border-gray-200' : ''}`}
+            >
+              <div className="flex justify-between items-start mb-3">
+                <div className="flex-1">
+                  <h3 className="text-lg font-medium text-gray-900">
                     {produto.nome}
-                  </div>
-                  <div className="text-sm text-gray-500">
-                    Por {produto.unidade}
-                  </div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                  {produto.codigo}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                    {produto.categoria}
-                  </span>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                  {formatCurrency(produto.preco)}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                  <span
-                    className={`${
-                      produto.estoque <= 10 ? 'text-red-600 font-bold' : ''
-                    }`}
-                  >
-                    {produto.estoque}
-                  </span>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
+                  </h3>
+                  <p className="text-sm text-gray-500">Por {produto.unidade}</p>
+                </div>
+                <div className="flex space-x-2 ml-4">
                   <button
                     onClick={() => handleEdit(produto)}
-                    className="text-blue-600 hover:text-blue-900"
+                    className="text-blue-600 hover:text-blue-900 text-sm font-medium"
                   >
                     Editar
                   </button>
                   <button
                     onClick={() => handleDelete(produto.id)}
-                    className="text-red-600 hover:text-red-900"
+                    className="text-red-600 hover:text-red-900 text-sm font-medium"
                   >
                     Excluir
                   </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4 text-sm">
+                <div>
+                  <span className="text-gray-500">Código:</span>
+                  <div className="font-medium">{produto.codigo}</div>
+                </div>
+                <div>
+                  <span className="text-gray-500">Categoria:</span>
+                  <div>
+                    <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                      {produto.categoria}
+                    </span>
+                  </div>
+                </div>
+                <div>
+                  <span className="text-gray-500">Preço:</span>
+                  <div className="font-medium text-green-600">
+                    {formatCurrency(produto.preco)}
+                  </div>
+                </div>
+                <div>
+                  <span className="text-gray-500">Estoque:</span>
+                  <div>
+                    <span
+                      className={`font-medium ${
+                        produto.estoque <= 10 ? 'text-red-600' : 'text-gray-900'
+                      }`}
+                    >
+                      {produto.estoque}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
 
         {produtos.length === 0 && (
           <div className="text-center py-8 text-gray-500">
@@ -225,8 +296,8 @@ const Produtos = () => {
 
       {/* Modal */}
       {showModal && (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-6 w-full max-w-md">
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg p-4 lg:p-6 w-full max-w-md max-h-[90vh] overflow-y-auto">
             <h2 className="text-lg font-bold mb-4">
               {editingProduct ? 'Editar Produto' : 'Novo Produto'}
             </h2>

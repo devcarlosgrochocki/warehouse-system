@@ -107,8 +107,8 @@ const Estoque = () => {
 
   return (
     <div>
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">
+      <div className="mb-6 lg:mb-8">
+        <h1 className="text-2xl lg:text-3xl font-bold text-gray-900">
           Controle de Estoque
         </h1>
         <p className="text-gray-600 mt-2">
@@ -117,61 +117,65 @@ const Estoque = () => {
       </div>
 
       {/* Estatísticas */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-        <div className="bg-white rounded-lg shadow p-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-6 lg:mb-8">
+        <div className="bg-white rounded-lg shadow p-4 lg:p-6">
           <div className="flex items-center">
-            <div className="bg-blue-500 rounded-lg p-3">
-              <span className="text-white text-2xl">📦</span>
+            <div className="bg-blue-500 rounded-lg p-2 lg:p-3">
+              <span className="text-white text-lg lg:text-2xl">📦</span>
             </div>
-            <div className="ml-4">
-              <h3 className="text-sm font-medium text-gray-500">
+            <div className="ml-3 lg:ml-4">
+              <h3 className="text-xs lg:text-sm font-medium text-gray-500">
                 Total de Produtos
               </h3>
-              <p className="text-2xl font-bold text-gray-900">
+              <p className="text-lg lg:text-2xl font-bold text-gray-900">
                 {totalProdutos}
               </p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow p-6">
+        <div className="bg-white rounded-lg shadow p-4 lg:p-6">
           <div className="flex items-center">
-            <div className="bg-red-500 rounded-lg p-3">
-              <span className="text-white text-2xl">❌</span>
+            <div className="bg-red-500 rounded-lg p-2 lg:p-3">
+              <span className="text-white text-lg lg:text-2xl">❌</span>
             </div>
-            <div className="ml-4">
-              <h3 className="text-sm font-medium text-gray-500">Sem Estoque</h3>
-              <p className="text-2xl font-bold text-gray-900">
+            <div className="ml-3 lg:ml-4">
+              <h3 className="text-xs lg:text-sm font-medium text-gray-500">
+                Sem Estoque
+              </h3>
+              <p className="text-lg lg:text-2xl font-bold text-gray-900">
                 {produtosSemEstoque}
               </p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow p-6">
+        <div className="bg-white rounded-lg shadow p-4 lg:p-6">
           <div className="flex items-center">
-            <div className="bg-yellow-500 rounded-lg p-3">
-              <span className="text-white text-2xl">⚠️</span>
+            <div className="bg-yellow-500 rounded-lg p-2 lg:p-3">
+              <span className="text-white text-lg lg:text-2xl">⚠️</span>
             </div>
-            <div className="ml-4">
-              <h3 className="text-sm font-medium text-gray-500">
+            <div className="ml-3 lg:ml-4">
+              <h3 className="text-xs lg:text-sm font-medium text-gray-500">
                 Baixo Estoque
               </h3>
-              <p className="text-2xl font-bold text-gray-900">
+              <p className="text-lg lg:text-2xl font-bold text-gray-900">
                 {produtosBaixoEstoque}
               </p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow p-6">
+        <div className="bg-white rounded-lg shadow p-4 lg:p-6">
           <div className="flex items-center">
-            <div className="bg-green-500 rounded-lg p-3">
-              <span className="text-white text-2xl">💰</span>
+            <div className="bg-green-500 rounded-lg p-2 lg:p-3">
+              <span className="text-white text-lg lg:text-2xl">💰</span>
             </div>
-            <div className="ml-4">
-              <h3 className="text-sm font-medium text-gray-500">Valor Total</h3>
-              <p className="text-2xl font-bold text-gray-900">
+            <div className="ml-3 lg:ml-4">
+              <h3 className="text-xs lg:text-sm font-medium text-gray-500">
+                Valor Total
+              </h3>
+              <p className="text-lg lg:text-2xl font-bold text-gray-900">
                 {formatCurrency(valorTotalEstoque)}
               </p>
             </div>
