@@ -1,16 +1,24 @@
 import axios from 'axios';
+import MockAPI from './mockAPI';
 
 // Configuração da API baseada no ambiente
-const API_BASE_URL = import.meta.env.DEV 
-  ? 'http://localhost:3002' 
-  : 'https://my-json-server.typicode.com/warehouse-demo/warehouse-api';
+const isDev = import.meta.env.DEV;
+const API_BASE_URL = 'http://localhost:3002';
 
-const api = axios.create({
-  baseURL: API_BASE_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
+let api;
+
+if (isDev) {
+  // Desenvolvimento: usar JSON Server
+  api = axios.create({
+    baseURL: API_BASE_URL,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+} else {
+  // Produção: usar MockAPI com localStorage
+  api = new MockAPI();
+}
 
 // Produtos
 export const produtosAPI = {
@@ -33,7 +41,15 @@ export const vendasAPI = {
 // Itens de Venda
 export const itensVendaAPI = {
   getAll: () => api.get('/itensVenda'),
-  getByVendaId: (vendaId) => api.get(`/itensVenda?vendaId=${vendaId}`),
+  getByVendaId: (vendaId) => {
+    if (isDev) {
+      return api.get(`/itensVenda?vendaId=${vendaId}`);
+    } else {
+      return api.get('/itensVenda').then(response => ({
+        data: response.data.filter(item => item.vendaId === vendaId)
+      }));
+    }
+  },
   create: (item) => api.post('/itensVenda', item),
   update: (id, item) => api.put(`/itensVenda/${id}`, item),
   delete: (id) => api.delete(`/itensVenda/${id}`),
