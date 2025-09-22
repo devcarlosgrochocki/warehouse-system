@@ -3,7 +3,7 @@ import MockAPI from './mockAPI';
 
 // Configuração da API baseada no ambiente
 const isDev = import.meta.env.DEV;
-const API_BASE_URL = 'http://localhost:3002';
+const API_BASE_URL = 'http://localhost:3003';
 
 let api;
 
